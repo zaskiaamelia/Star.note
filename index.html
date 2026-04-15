@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✦ Star Notes ✦</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===== PARTICLES BACKGROUND ===== -->
+    <div id="particles"></div>
+
+    <!-- ===== HALAMAN PEMBUKAAN ===== -->
+    <section id="openingPage" class="page active">
+        <div class="opening-content">
+            <div class="sun-container">
+                <div class="sun"></div>
+                <div class="sun-glow"></div>
+            </div>
+
+            <h1 class="opening-title">
+                <span class="star-icon">✦</span>
+                Star Notes
+                <span class="star-icon">✦</span>
+            </h1>
+            <p class="opening-subtitle">Satu bintang, satu hari ✨</p>
+
+            <div class="opening-menu">
+                <button class="menu-btn" onclick="showPage('notePage')">
+                    <span class="btn-icon">⭐</span>
+                    <span class="btn-text">Note Harian</span>
+                    <span class="btn-desc">Buka note bintang hari ini</span>
+                </button>
+
+                <button class="menu-btn" onclick="showPage('greetingPage')">
+                    <span class="btn-icon">🌅</span>
+                    <span class="btn-text">Ucapan Selamat Pagi</span>
+                    <span class="btn-desc">Kirim semangat pagi</span>
+                </button>
+
+                <button class="menu-btn" onclick="showPage('messagePage')">
+                    <span class="btn-icon">💌</span>
+                    <span class="btn-text">Tulis Pesan</span>
+                    <span class="btn-desc">Kirim pesan rahasia</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HALAMAN NOTE BINTANG ===== -->
+    <section id="notePage" class="page">
+        <div class="note-header">
+            <button class="back-btn" onclick="showPage('openingPage')">← Kembali</button>
+            <h2>✦ Note Bintang ✦</h2>
+            <p class="date-display" id="currentDate"></p>
+        </div>
+
+        <div class="note-status" id="noteStatus"></div>
+
+        <div class="string-container">
+            <div class="string-line"></div>
+
+            <div class="stars-row" id="starsRow">
+                <!-- Bintang-bintang akan di-generate oleh JavaScript -->
+            </div>
+        </div>
+
+        <!-- MODAL NOTE -->
+        <div class="note-modal" id="noteModal">
+            <div class="note-modal-content">
+                <div class="note-modal-star">⭐</div>
+                <h3 id="noteModalTitle"></h3>
+                <p id="noteModalContent"></p>
+                <button class="close-modal" onclick="closeNoteModal()">✕ Tutup</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HALAMAN UCAPAN SELAMAT PAGI ===== -->
+    <section id="greetingPage" class="page">
+        <div class="note-header">
+            <button class="back-btn" onclick="showPage('openingPage')">← Kembali</button>
+            <h2>🌅 Selamat Pagi!</h2>
+        </div>
+
+        <div class="greeting-container">
+            <div class="greeting-sun"></div>
+            <h3 class="greeting-title" id="greetingTitle">Meowrning, Matahari! ☀️</h3>
+            <p class="greeting-text">
+                <br>
+                Semoga hari ini indah. 🌻
+            </p>
+
+            <div class="greeting-cards">
+                <div class="greet-card">
+                    <span class="greet-emoji">🌸</span>
+                    <p>"Semoga harinya menyenangkan dan membawa rezeki yang buanyakkkk yaaaa"</p>
+                </div>
+                <div class="greet-card">
+                    <span class="greet-emoji">🦋</span>
+                    <p>"Jangan mudah putus asa, kak!"</p>
+                </div>
+                <div class="greet-card">
+                    <span class="greet-emoji">🌈</span>
+                    <p>"Jangan lupa selalu senyum yaa, biar jadi orang yang good vibes! habis senyum, buka kamera, terus teken tombolnya, habis itu papnya dikirim ke aku mweheheheh."</p>
+                </div>
+            </div>
+
+            <button class="share-greeting-btn" onclick="shareGreeting()">
+                💫 Bagikan Ucapan Ini
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== HALAMAN TULIS PESAN ===== -->
+    <section id="messagePage" class="page">
+        <div class="note-header">
+            <button class="back-btn" onclick="showPage('openingPage')">← Kembali</button>
+            <h2>💌 Tulis Pesan</h2>
+        </div>
+
+        <div class="message-container">
+            <div class="message-decoration">✦ ✧ ✦</div>
+
+            <form id="messageForm" onsubmit="sendMessage(event)">
+                <div class="form-group">
+                    <label for="senderName">Nama Kamu</label>
+                    <input type="text" id="senderName" placeholder="Siapa namamu?" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senderEmail">Email Kamu</label>
+                    <input type="email" id="senderEmail" placeholder="email@contoh.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="messageSubject">Subjek</label>
+                    <input type="text" id="messageSubject" placeholder="Tentang apa pesanmu?" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="messageBody">Pesan</label>
+                    <textarea id="messageBody" placeholder="Tulis pesanmu di sini..." required></textarea>
+                </div>
+
+                <button type="submit" class="send-btn" id="sendBtn">
+                    ✉️ Kirim Pesan
+                </button>
+            </form>
+
+            <div class="message-status" id="messageStatus"></div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>Made with ✦ and ☀️ — Star Notes © 2026</p>
+        <br>
+        <p>-Zaskia Amelia-</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
